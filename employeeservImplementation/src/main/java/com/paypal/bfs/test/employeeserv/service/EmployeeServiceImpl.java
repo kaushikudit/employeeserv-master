@@ -85,7 +85,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     protected EmployeeEntity addExistingEmpWithUpdatedDetails(EmployeeEntity existingEmployee, Employee newEmployee) {
-        log.info("Updating details of employee {}.", existingEmployee.getEmpId());
+        log.info("Hi {}, please wait for a while, we're updating your details {}.", existingEmployee.getFirstName(), newEmployee);
         existingEmployee.setAddress(newEmployee.getAddress());
         existingEmployee.setDateOfBirth(newEmployee.getDateOfBirth());
         existingEmployee.setFirstName(newEmployee.getFirstName());
