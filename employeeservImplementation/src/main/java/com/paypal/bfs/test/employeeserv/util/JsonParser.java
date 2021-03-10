@@ -23,7 +23,7 @@ public class JsonParser {
         try {
             object = (T) mapper.readValue(json, cls);
         } catch (final IOException e1) {
-//            log.error("{}", e1);
+            log.error("{}", e1);
         }
         return object;
     }
@@ -41,7 +41,7 @@ public class JsonParser {
             mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
             jsonInString = mapper.writeValueAsString(obj);
         } catch (final IOException e1) {
-//            log.error("{}", e1);
+            log.error("{}", e1);
         }
         return jsonInString;
     }
