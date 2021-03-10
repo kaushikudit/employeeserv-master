@@ -9,7 +9,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-03-10T21:36:07+0530",
+    date = "2021-03-10T22:38:32+0530",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_252 (Private Build)"
 )
 public class ModelToEntityImpl implements ModelToEntity {

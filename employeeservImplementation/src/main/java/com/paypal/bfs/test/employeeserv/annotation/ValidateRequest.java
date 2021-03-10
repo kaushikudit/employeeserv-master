@@ -1,6 +1,6 @@
 package com.paypal.bfs.test.employeeserv.annotation;
 
-import com.paypal.bfs.test.employeeserv.impl.service.CustomRequestValidator;
+import com.paypal.bfs.test.employeeserv.functional.tests.CustomRequestValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
