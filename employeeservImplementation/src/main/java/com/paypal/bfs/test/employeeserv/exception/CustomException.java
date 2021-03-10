@@ -3,6 +3,8 @@ package com.paypal.bfs.test.employeeserv.exception;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
+
 @Data
 public class CustomException extends RuntimeException {
     private String errorMessage;

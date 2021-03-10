@@ -32,4 +32,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .errorMessage("Something went wrong.").build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionModel);
     }
+
+    @ExceptionHandler(value = {ConstraintViolationException.class})
+    protected ResponseEntity<?> handleConstraintViolationException(
+            final ConstraintViolationException ex) {
+        log.error("error {}", ex);
+        ExceptionModel exceptionModel = ExceptionModel.builder()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .violations(ex.getViolations()).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionModel);
+    }
 }

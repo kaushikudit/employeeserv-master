@@ -1,6 +1,7 @@
 package com.paypal.bfs.test.employeeserv.mapper;
 
 import com.paypal.bfs.test.employeeserv.api.model.Employee;
+import com.paypal.bfs.test.employeeserv.dto.EmployeeDto;
 import com.paypal.bfs.test.employeeserv.entity.EmployeeEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-03-10T01:09:07+0530",
+    date = "2021-03-10T21:36:07+0530",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_252 (Private Build)"
 )
 public class ModelToEntityImpl implements ModelToEntity {
@@ -61,5 +62,22 @@ public class ModelToEntityImpl implements ModelToEntity {
         }
 
         return list;
+    }
+
+    @Override
+    public EmployeeDto modelToDto(Employee employee) {
+        if ( employee == null ) {
+            return null;
+        }
+
+        EmployeeDto employeeDto = new EmployeeDto();
+
+        employeeDto.setEmpId( employee.getEmpId() );
+        employeeDto.setFirstName( employee.getFirstName() );
+        employeeDto.setLastName( employee.getLastName() );
+        employeeDto.setDateOfBirth( employee.getDateOfBirth() );
+        employeeDto.setAddress( employee.getAddress() );
+
+        return employeeDto;
     }
 }

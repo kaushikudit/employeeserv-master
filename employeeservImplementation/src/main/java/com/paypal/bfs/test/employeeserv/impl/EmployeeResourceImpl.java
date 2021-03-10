@@ -3,8 +3,11 @@ package com.paypal.bfs.test.employeeserv.impl;
 import com.paypal.bfs.test.employeeserv.api.EmployeeResource;
 import com.paypal.bfs.test.employeeserv.api.model.Employee;
 import com.paypal.bfs.test.employeeserv.api.service.EmployeeService;
+import com.paypal.bfs.test.employeeserv.dto.EmployeeDto;
 import com.paypal.bfs.test.employeeserv.entity.EmployeeEntity;
+import com.paypal.bfs.test.employeeserv.mapper.ModelToEntity;
 import com.paypal.bfs.test.employeeserv.repo.EmployeeRepository;
+import com.paypal.bfs.test.employeeserv.validator.BasicValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +30,9 @@ public class EmployeeResourceImpl implements EmployeeResource {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private BasicValidator validator;
+
     @Override
     public ResponseEntity<Employee> employeeGetById(final int id) {
         return ResponseEntity.
@@ -36,6 +42,7 @@ public class EmployeeResourceImpl implements EmployeeResource {
 
     @Override
     public ResponseEntity<Employee> addEmployee(final Employee employee) {
+        validator.validate(ModelToEntity.INSTANCE.modelToDto(employee));
         return ResponseEntity.
                 status(HttpStatus.CREATED).
                 body(employeeService.addEmployee(employee));
