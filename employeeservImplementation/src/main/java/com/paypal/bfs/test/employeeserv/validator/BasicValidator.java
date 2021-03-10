@@ -46,7 +46,7 @@ public class BasicValidator {
       }
     }
     if (!errors.isEmpty()) {
-      log.info("Validation Ended With Errors {}.", errors);
+      log.error("Validation Ended With Errors {}.", errors);
       throw new ConstraintViolationException(errors);
     } else {
       log.info("Validation Ended Without Exception");

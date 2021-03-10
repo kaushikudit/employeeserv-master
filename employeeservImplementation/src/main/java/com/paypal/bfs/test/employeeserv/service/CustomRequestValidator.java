@@ -1,4 +1,4 @@
-package com.paypal.bfs.test.employeeserv.functional.tests;
+package com.paypal.bfs.test.employeeserv.service;
 
 import com.paypal.bfs.test.employeeserv.annotation.ValidateRequest;
 import com.paypal.bfs.test.employeeserv.api.service.CustomValidation;

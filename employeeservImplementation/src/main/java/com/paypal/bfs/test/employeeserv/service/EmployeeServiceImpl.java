@@ -1,4 +1,4 @@
-package com.paypal.bfs.test.employeeserv.functional.tests;
+package com.paypal.bfs.test.employeeserv.service;
 
 import com.paypal.bfs.test.employeeserv.api.model.Employee;
 import com.paypal.bfs.test.employeeserv.api.service.EmployeeService;
@@ -24,11 +24,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findEmployeeById(int id) {
+        log.info("Request received for searching employee with id {}.", id);
         try {
             Employee employee = this.findEmployee(id);
             if(Objects.isNull(employee)) {
                 throw new CustomException(HttpStatus.NOT_FOUND, ErrorCode.EMPLOYEE_NOT_FOUND.getMessage());
             }
+            log.info("Employee details {}.", employee);
 
             return employee;
         } catch(CustomException ex) {
@@ -42,14 +44,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) {
+        log.info("Request received for adding employee {}.", employee);
         try {
             Employee newEmployee = employee;
+            log.info("Checking if employee having id {} is already present...", employee.getEmpId());
             Employee existingEmployee = this.findEmployee(employee.getEmpId());
             if(Objects.nonNull(existingEmployee)) {
                 EmployeeEntity employeeEntity = employeeRepository.findByEmpId(employee.getEmpId());
+                log.info("Employee details currently present {}.", employeeEntity);
                 employeeEntity = this.addExistingEmpWithUpdatedDetails(employeeEntity, newEmployee);
                 return ModelToEntity.INSTANCE.entityToModel(employeeRepository.save(employeeEntity));
             } else {
+                log.info("Adding employee {}.", employee);
                 newEmployee = ModelToEntity.
                         INSTANCE.
                         entityToModel(employeeRepository.save(
@@ -65,6 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployees() {
+        log.info("Received request for fetching all the employees.");
         try {
             List<Employee> employees = ModelToEntity.
                     INSTANCE.
@@ -77,7 +84,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-    private EmployeeEntity addExistingEmpWithUpdatedDetails(EmployeeEntity existingEmployee, Employee newEmployee) {
+    protected EmployeeEntity addExistingEmpWithUpdatedDetails(EmployeeEntity existingEmployee, Employee newEmployee) {
+        log.info("Updating details of employee {}.", existingEmployee.getEmpId());
         existingEmployee.setAddress(newEmployee.getAddress());
         existingEmployee.setDateOfBirth(newEmployee.getDateOfBirth());
         existingEmployee.setFirstName(newEmployee.getFirstName());
